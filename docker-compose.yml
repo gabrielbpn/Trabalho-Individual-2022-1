@@ -22,3 +22,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+  front_service:
+      build: ./library_front/
+      command: ["npm", "start"]
+      ports:
+        - 3000:3000
