@@ -23,7 +23,18 @@ services:
     depends_on:
       - db
   front_service:
-      build: ./library_front/
-      command: ["npm", "start"]
-      ports:
-        - 3000:3000
+    build: ./library_front/
+    command: ["npm", "start"]
+    ports:
+      - 3000:3000
+  nginx:
+    build:
+      context: ../nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - "web"
+      - "db"
+      - "front_service"
